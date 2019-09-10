@@ -1,8 +1,7 @@
 import 'package:built_value/built_value.dart';
-import 'package:splasher_flutter/model/links.dart';
-import 'package:splasher_flutter/model/urls.dart';
-import 'package:splasher_flutter/model/user.dart';
-
+import 'package:splasher_flutter/models/links.dart';
+import 'package:splasher_flutter/models/urls.dart';
+import 'package:splasher_flutter/models/user.dart';
 part 'photo.g.dart';
 
 abstract class Photo implements Built<Photo, PhotoBuilder> {

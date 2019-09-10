@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:splasher_flutter/model/photo.dart';
+import 'package:splasher_flutter/models/photo.dart';
 
 part 'photo_list_response.g.dart';
 
