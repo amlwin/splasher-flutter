@@ -3,9 +3,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:redux/redux.dart';
 import 'package:splasher_flutter/actions/actions.dart';
-import 'package:splasher_flutter/container/home_page.dart';
 import 'package:splasher_flutter/middlewares/middleware.dart';
 import 'package:splasher_flutter/models/app_state.dart';
+import 'package:splasher_flutter/presentation/home_page.dart';
 import 'package:splasher_flutter/reducers/app_reducer.dart';
 import 'package:splasher_flutter/repository/photo_repository_impl.dart';
 
@@ -20,7 +20,6 @@ class SplasherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("store type is $store and type is ${store.state}");
     return StoreProvider(
       store: store,
       child: MaterialApp(

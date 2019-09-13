@@ -15,15 +15,6 @@ List<Middleware<AppState>> appMiddleware(PhotoRepository repository) {
   ];
 }
 
-/*Middleware<AppState> _createPhotosLoad(PhotoRepository repository) {
-  print("calling");
-  return (Store<AppState> store, action, NextDispatcher next) {
-    print("start load");
-    store.dispatch(PhotoLoadFailedAction());
-    next(action);
-  };
-}*/
-
 void Function(Store<AppState> store, dynamic action, NextDispatcher dispatcher)
     _loadPhotos(PhotoRepository repository) {
   //return Middleware
@@ -33,7 +24,7 @@ void Function(Store<AppState> store, dynamic action, NextDispatcher dispatcher)
     repository.loadPhoto().then((BuiltList<Photo> photos) {
       store.dispatch(PhotoLoadedAction(photos));
     }).then((error) {
-      store.dispatch(PhotoLoadFailedAction());
+      //store.dispatch(PhotoLoadFailedAction());
     });
     next(action);
   };
