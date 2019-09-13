@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -40,10 +41,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildList(BuiltList<Photo> photos) {
-    return ListView.builder(
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, mainAxisSpacing: 2, crossAxisSpacing: 2),
         itemCount: photos.length,
         itemBuilder: (context, index) {
-          return ListTile(title: Text(photos[index].user.username));
+          return Image.network(
+            photos[index].urls.small,
+            fit: BoxFit.cover,
+          );
         });
   }
 }
