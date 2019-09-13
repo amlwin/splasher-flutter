@@ -7,16 +7,29 @@ import 'package:splasher_flutter/models/photo.dart';
 import 'package:splasher_flutter/repository/photo_repository.dart';
 
 List<Middleware<AppState>> appMiddleware(PhotoRepository repository) {
+  //final _loadPhotos = _createPhotosLoad(repository);
+
   return [
     TypedMiddleware<AppState, PhotoLoadAction>(_loadPhotos(repository)),
     LoggingMiddleware.printer(),
   ];
 }
 
+/*Middleware<AppState> _createPhotosLoad(PhotoRepository repository) {
+  print("calling");
+  return (Store<AppState> store, action, NextDispatcher next) {
+    print("start load");
+    store.dispatch(PhotoLoadFailedAction());
+    next(action);
+  };
+}*/
+
 void Function(Store<AppState> store, dynamic action, NextDispatcher dispatcher)
     _loadPhotos(PhotoRepository repository) {
   //return Middleware
+  print("calling");
   return (store, action, next) {
+    print("start load");
     repository.loadPhoto().then((BuiltList<Photo> photos) {
       store.dispatch(PhotoLoadedAction(photos));
     }).then((error) {

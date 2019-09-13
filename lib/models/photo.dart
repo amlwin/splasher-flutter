@@ -13,10 +13,15 @@ abstract class Photo implements Built<Photo, PhotoBuilder> {
   static Serializer<Photo> get serializer => _$photoSerializer;
 
   String get id;
+
   int get width;
+
   int get height;
+
   User get user;
+
   Links get links;
+
   Urls get urls;
 
   Photo._();
