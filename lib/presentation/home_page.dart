@@ -5,7 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:splasher_flutter/container/app_loading.dart';
 import 'package:splasher_flutter/container/photo_connector.dart';
-import 'package:splasher_flutter/models/app_state.dart';
+import 'package:splasher_flutter/state/app_state.dart';
 import 'package:splasher_flutter/models/photo.dart';
 import 'package:splasher_flutter/presentation/loading_indicator.dart';
 import 'package:splasher_flutter/selectors/selector.dart';
@@ -80,7 +80,7 @@ class _ViewModel {
   _ViewModel({this.loading, this.photos});
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-        loading: loadingSelector(store.state),
-        photos: photosSelector(store.state));
+        loading: loadingSelector(store.state.photoListState),
+        photos: photosSelector(store.state.photoListState));
   }
 }

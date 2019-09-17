@@ -1,8 +1,10 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:redux/redux.dart';
-import 'package:splasher_flutter/reducers/photo_list_reducer.dart';
-import 'package:splasher_flutter/state/app_state.dart';
+import 'package:splasher_flutter/actions/actions.dart';
+import 'package:splasher_flutter/state/photo_list_state.dart';
 
-/*final Reducer<PhotoListState> appReducers = combineReducers([
+final Reducer<PhotoListState> photoListReducer =
+    combineReducers<PhotoListState>([
   TypedReducer<PhotoListState, PhotoLoadedAction>(_onPhotoListLoaded),
   TypedReducer<PhotoListState, PhotoLoadFailedAction>(_onPhotoListLoadFailed)
 ]);
@@ -15,11 +17,4 @@ PhotoListState _onPhotoListLoaded(
 PhotoListState _onPhotoListLoadFailed(
     PhotoListState state, PhotoLoadFailedAction action) {
   return PhotoListState(isLoading: false, photos: BuiltList.from([]));
-}*/
-
-class AppReducer extends ReducerClass<AppState> {
-  @override
-  AppState call(AppState state, action) {
-    return AppState(photoListReducer(state.photoListState, action));
-  }
 }

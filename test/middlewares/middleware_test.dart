@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';
 import 'package:splasher_flutter/actions/actions.dart';
 import 'package:splasher_flutter/middlewares/middleware.dart';
-import 'package:splasher_flutter/models/app_state.dart';
+import 'package:splasher_flutter/state/app_state.dart';
 import 'package:splasher_flutter/models/photo.dart';
 import 'package:splasher_flutter/reducers/app_reducer.dart';
 import 'package:splasher_flutter/repository/photo_repository.dart';

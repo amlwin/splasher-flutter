@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:splasher_flutter/models/app_state.dart';
+import 'package:splasher_flutter/state/app_state.dart';
 import 'package:splasher_flutter/models/photo.dart';
 
 class PhotoListConnector extends StatelessWidget {
@@ -11,7 +11,8 @@ class PhotoListConnector extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
       converter: (store) => _ViewModel(store.state),
-      builder: (context, vm) => builder(context, vm.state.photos.toList()),
+      builder: (context, vm) =>
+          builder(context, vm.state.photoListState.photos.toList()),
     );
   }
 }
