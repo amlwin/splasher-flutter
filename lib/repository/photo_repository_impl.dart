@@ -10,11 +10,12 @@ class PhotoRepositoryImpl implements PhotoRepository {
   final base_url = "https://api.unsplash.com/";
   final photo_list_url = "photos";
   final key = "?client_id=${AccessKey.clientId}";
+  final perPage = "&per_page=20";
 
   @override
   Future<BuiltList<Photo>> loadPhoto() async {
     final http.Response response =
-        await http.get(base_url + photo_list_url + key);
+        await http.get(base_url + photo_list_url + key + perPage);
     return Future.value(Photo.fromJsonList(response.body));
   }
 }

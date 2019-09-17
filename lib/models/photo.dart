@@ -28,7 +28,7 @@ abstract class Photo implements Built<Photo, PhotoBuilder> {
   factory Photo([void Function(PhotoBuilder) updates]) = _$Photo;
 
   static BuiltList<Photo> fromJsonList(String responseString) {
-    final List<dynamic> jsonVal = json.decode(responseString);
+    final jsonVal = json.decode(responseString);
     return deserializeListOf<Photo>(jsonVal);
   }
 

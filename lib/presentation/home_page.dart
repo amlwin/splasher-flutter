@@ -8,6 +8,7 @@ import 'package:splasher_flutter/container/photo_connector.dart';
 import 'package:splasher_flutter/models/app_state.dart';
 import 'package:splasher_flutter/models/photo.dart';
 import 'package:splasher_flutter/presentation/loading_indicator.dart';
+import 'package:splasher_flutter/selectors/selector.dart';
 
 class HomePage extends StatefulWidget {
   final void Function() onInit;
@@ -19,22 +20,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ScrollController _pagingController;
   @override
   void initState() {
     widget.onInit();
     super.initState();
+    _pagingController = ScrollController()
+      ..addListener(() {
+        if (_pagingController.position.pixels ==
+            _pagingController.position.maxScrollExtent) {
+          //do pagination here
+          print("called pagination");
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pagingController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: StoreConnector<AppState, _ViewModel>(
-      converter: (store) => _ViewModel(store.state),
+      converter: (store) => _ViewModel.fromStore(store),
       builder: (context, vm) {
-        if (vm.state.isLoading) {
+        if (vm.loading) {
           return Center(child: CircularProgressIndicator());
         } else {
-          return _buildList(vm.state.photos);
+          return _buildList(vm.photos);
         }
       },
     ));
@@ -42,19 +58,29 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildList(BuiltList<Photo> photos) {
     return GridView.builder(
+        controller: _pagingController,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, mainAxisSpacing: 2, crossAxisSpacing: 2),
+            crossAxisCount: 3, mainAxisSpacing: 3, crossAxisSpacing: 3),
         itemCount: photos.length,
         itemBuilder: (context, index) {
-          return Image.network(
-            photos[index].urls.small,
-            fit: BoxFit.cover,
+          return InkWell(
+            onTap: () {},
+            child: Image.network(
+              photos[index].urls.small,
+              fit: BoxFit.cover,
+            ),
           );
         });
   }
 }
 
 class _ViewModel {
-  AppState state;
-  _ViewModel(this.state);
+  final bool loading;
+  final BuiltList<Photo> photos;
+  _ViewModel({this.loading, this.photos});
+  static _ViewModel fromStore(Store<AppState> store) {
+    return _ViewModel(
+        loading: loadingSelector(store.state),
+        photos: photosSelector(store.state));
+  }
 }
